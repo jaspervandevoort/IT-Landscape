@@ -1,9 +1,9 @@
-name: Build and Push Docker Image
+name: test
 
 on:
   push:
     branches:
-      - main  # trigger bij elke push naar main
+      - main  # Trigger bij elke push naar main
 
 jobs:
   build:
