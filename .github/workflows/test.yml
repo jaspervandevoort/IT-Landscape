@@ -20,8 +20,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase repo name
+        run: echo "REPO_NAME=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build Docker image
-        run: docker build -t ghcr.io/jaspervandevoort/${{ github.event.repository.name }}:latest .
+        run: docker build -t ghcr.io/jaspervandevoort/${{ env.REPO_NAME }}:latest .
 
       - name: Push Docker image
-        run: docker push ghcr.io/jaspervandevoort/${{ github.event.repository.name }}:latest
+        run: docker push ghcr.io/jaspervandevoort/${{ env.REPO_NAME }}:latest
+
